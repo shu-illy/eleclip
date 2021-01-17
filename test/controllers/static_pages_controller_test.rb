@@ -4,12 +4,13 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get root" do
     get root_url
     assert_response :success
+    assert_select "title", "ElectroNote"
   end
 
   test "should get contact" do
     get static_pages_contact_url
     assert_response :success
-    assert_select "title", "Contact | EleCLIP"
+    assert_select "title", "Contact | ElectroNote"
   end
 
 end
