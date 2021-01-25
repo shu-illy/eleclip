@@ -268,10 +268,9 @@ DEPENDENCIES
   spring (= 2.1.0)
   spring-watcher-listen (= 2.0.1)
   turbolinks (= 5.2.0)
-  tzinfo-data
   web-console (= 4.0.1)
   webdrivers (= 4.1.2)
   webpacker (= 4.0.7)
 
 BUNDLED WITH
-   1.17.2
+   2.1.4

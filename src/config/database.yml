@@ -9,9 +9,11 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: <%= ENV["ELECTRONOTE_DB_USERNAME"] %>
-  password: <%= ENV["ELECTRONOTE_DB_PASSWORD"] %>
-  host: localhost
+  username: root
+  password: <%= ENV.fetch('ROOT_DB_PASSWORD', 'pass') %>
+  # username: <%= ENV.fetch('ELECTRONOTE_DB_USERNAME', 'user') %>
+  # password: <%= ENV.fetch('ELECTRONOTE_DB_PASSWORD', 'pass') %>
+  host: db
 
 development:
   <<: *default
