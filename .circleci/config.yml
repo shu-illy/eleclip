@@ -17,7 +17,7 @@ jobs:
       - image: circleci/ruby:2.7
       - image: circleci/mysql:5.5
         environment:
-          MYSQL_ROOT_PASSWORD: <%= ENV['ROOT_DB_PASSWORD_DEV'] %>
+          MYSQL_ROOT_PASSWORD: 9mltmfny
           MYSQL_DATABASE: electronote_test
           MYSQL_USER: root
     environment:
@@ -32,10 +32,10 @@ jobs:
       - ruby/install-deps
       - run:
           name: Database setup
-          command: rails db:migrate
+          command: bundle exec rails db:migrate
       - run:
           name: test
-          command: rails test
+          command: bundle exec rails test
 
 workflows:
   version: 2
