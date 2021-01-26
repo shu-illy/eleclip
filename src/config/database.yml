@@ -11,7 +11,7 @@ default: &default
   timeout: 5000
   username: root
   password: <%= ENV['ROOT_DB_PASSWORD_DEV'] %>
-  host: db
+  host: <%= ENV.fetch("APP_DATABASE_HOST") { 'db' } %>
 
 development:
   <<: *default
