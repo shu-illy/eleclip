@@ -10,7 +10,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   username: root
-  password: <%= ENV['ROOT_DB_PASSWORD_DEV'] %>
+  password: <%= ENV.fetch("ROOT_DB_PASSWORD_DEV") { 'rootpass' } %>
   host: <%= ENV.fetch("APP_DATABASE_HOST") { 'db' } %>
 
 development:
