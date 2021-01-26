@@ -58,7 +58,7 @@ jobs:
       - run:
           name: database setup
           command: heroku run bundle exec rake db:migrate
-          RAILS_ENV=production -a $HEROKUK_APP_NAME
+          RAILS_ENV=production -a $HEROKU_APP_NAME
 
 workflows:
   version: 2
