@@ -9,8 +9,8 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: root
-  password: <%= ENV.fetch("ROOT_DB_PASSWORD_DEV") { 'rootpass' } %>
+  username: <%= ENV.fetch("APP_USER") { 'root' } %>
+  password: <%= ENV.fetch("APP_DB_PASSWORD") { 'rootpass' } %>
   host: <%= ENV.fetch("APP_DATABASE_HOST") { 'db' } %>
 
 development:
