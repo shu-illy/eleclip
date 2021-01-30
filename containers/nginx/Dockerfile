@@ -5,6 +5,7 @@ RUN rm -f /etc/nginx/conf.d/*
 
 # Nginxの設定ファイルをコンテナにコピー
 ADD nginx.conf /etc/nginx/conf.d/app.conf
+# COPY ../public/index.html /app/public/index.html
 
 # ビルド完了後にNginxを起動
 CMD /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf
