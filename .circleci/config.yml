@@ -40,7 +40,7 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/classic:edge
+      - image: circleci/ruby:2.7
     steps:
       - checkout
       - add_ssh_keys
