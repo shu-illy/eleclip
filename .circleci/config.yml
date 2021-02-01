@@ -6,7 +6,7 @@ orbs:
 jobs:
   build:
     machine:
-      - image: circleci/classic:edge
+      image: circleci/classic:edge
     working_directory: ~/electronote
     steps:
       - checkout:
@@ -22,7 +22,7 @@ jobs:
           command: sleep 1
   test:
     machine:
-      - image: circleci/classic:edge
+      image: circleci/classic:edge
     environment:
     -  MYSQL_ROOT_PASSWORD: rootpass
     -  MYSQL_DATABASE: electronote_test
@@ -45,7 +45,7 @@ jobs:
 
   deploy:
     machine:
-      - image: circleci/classic:edge
+      image: circleci/classic:edge
     working_directory: ~/electronote
     steps:
       - checkout
