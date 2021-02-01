@@ -44,7 +44,7 @@ jobs:
           command: touch .env
       - run:
           name: rails db:migrate
-          command: docker-compose exec app rails db:migrate
+          command: docker-compose run app rails db:migrate
       - run:
           name: test
           command: docker-compose exec app rails test
