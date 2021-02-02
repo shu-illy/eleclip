@@ -57,8 +57,8 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-        fingerprints:
-          - "c5:50:97:f7:f6:1d:d8:b9:4c:43:69:e7:66:7e:ff:ce"
+          fingerprints:
+            -　"c5:50:97:f7:f6:1d:d8:b9:4c:43:69:e7:66:7e:ff:ce"
       # - run:
       #     name: make dummy envfile
       #     command: touch .env
