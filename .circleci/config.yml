@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker:
-      image: circleci/ruby:2.7
+      - image: circleci/ruby:2.7
     working_directory: ~/electronote
     # environment:
     #   - RAILS_ENV: 'test'
