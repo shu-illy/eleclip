@@ -9,9 +9,9 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: <%= ENV.fetch("APP_USER") { 'root' } %>
-  password: <%= ENV.fetch("APP_DB_PASSWORD") { 'rootpass' } %>
-  host: <%= ENV.fetch("APP_DATABASE_HOST") { 'db' } %>
+  username: root
+  password: rootpass
+  host: db
 
 development:
   <<: *default
@@ -23,6 +23,7 @@ development:
 test:
   <<: *default
   database: electronote_test
+  host: <%= ENV.fetch("APP_DATABASE_HOST") { 'db' } %>
 
 production:
   <<: *default
