@@ -55,6 +55,7 @@ jobs:
             MYSQL_DATABASE: electronote_production
             MYSQL_USER: root
             MYSQL_ALLOW_EMPTY_PASSWORD: true
+      - image: circleci/nginx
     environment:
       APP_DATABASE_HOST: "127.0.0.1"
     working_directory: ~/electronote
@@ -68,6 +69,12 @@ jobs:
       - deploy:
           name: Capistrano deploy
           command: bundle exec cap production deploy
+      - run:
+          name: Nginx conf copy
+          command: cp containers/nginx/electronote.conf /etc/nginx/conf.d/electronote.conf
+      - run:
+          name: Nginx restart
+          command: sudo service nginx restart
 
 workflows:
   version: 2
