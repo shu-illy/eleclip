@@ -15,7 +15,7 @@ services:
       MYSQL_PASSWORD: password
   app:
     build: .
-    command: bundle exec puma -C config/puma.rb
+    command: bundle exec unicorn -p 3000 -c /electronote/config/unicorn/production.rb
     volumes:
       - .:/app
       - public-data:/app/public

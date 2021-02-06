@@ -12,7 +12,7 @@ RUN bundle config --local set path 'vendor/bundle' \
 
 
 
-# puma.sockを配置するディレクトリを作成
+# *.sockを配置するディレクトリを作成
 RUN mkdir -p tmp/sockets
 
 COPY start.sh /start.sh
