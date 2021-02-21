@@ -12,10 +12,12 @@ RUN bundle config --local set path 'vendor/bundle' && \
     bundle install
 
 # *.sockを配置するディレクトリを作成
+RUN rm -rf /electronote/tmp/*
 RUN mkdir -p /electronote/tmp/sockets
-
-EXPOSE 3000
+RUN mkdir -p /electronote/tmp/pids
 
 COPY start.sh /start.sh
 RUN chmod 744 /start.sh
 CMD ["sh", "/start.sh"]
+
+EXPOSE 3000

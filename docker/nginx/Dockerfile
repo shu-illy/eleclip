@@ -15,7 +15,10 @@ RUN rm -f /etc/nginx/conf.d/*
 # Nginxの設定ファイルをコンテナにコピー
 ADD ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 ADD ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+ADD ./docker/nginx/index.html /index.html
 # COPY ../public/index.html /app/public/index.html
 
 # ビルド完了後にNginxを起動
 CMD /usr/sbin/nginx -g 'daemon off;' -c /etc/nginx/nginx.conf
+
+EXPOSE 80
