@@ -5,19 +5,19 @@ gem 'rails',      '6.0.3'
 gem 'mysql2'
 gem 'bcrypt',         '3.1.13'
 gem 'bootstrap-sass', '3.4.1'
-gem 'puma',       '4.3.6'
 gem 'sass-rails', '5.1.0'
 gem 'webpacker',  '4.0.7'
 gem 'turbolinks', '5.2.0'
 gem 'jbuilder',   '2.9.1'
 gem 'bootsnap',   '1.4.5', require: false
+gem 'unicorn'
 
 group :development, :test do
   gem 'byebug',  '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capistrano'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
+  # gem 'capistrano'
+  # gem 'capistrano-bundler'
+  # gem 'capistrano-rails'
+  # gem 'capistrano-rbenv'
 end
 
 group :development do
@@ -42,8 +42,5 @@ group :production do
 end
 
 group :production, :staging do
-  gem 'unicorn'
 end
 
-# Windows ではタイムゾーン情報用の tzinfo-data gem を含める必要があります
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
