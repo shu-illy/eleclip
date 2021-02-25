@@ -54,6 +54,7 @@ jobs:
   build-and-push-image:
     executor: container
     steps:
+      - checkout
       - aws-ecr/build-and-push-image:
           filters:
             branches:
@@ -93,6 +94,7 @@ jobs:
   deploy-service-update:
     executor: container
     steps:
+      - checkout
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
