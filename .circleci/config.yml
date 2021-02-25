@@ -54,11 +54,7 @@ jobs:
   build-and-push-image:
     executor: container
     steps:
-      - checkout
       - aws-ecr/build-and-push-image:
-          filters:
-            branches:
-              only: main
           account-url: AWS_ACCOUNT_URL
           create-repo: true
           dockerfile: ./docker/nginx/Dockerfile
@@ -96,15 +92,11 @@ jobs:
     steps:
       - checkout
       - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build-and-push-image
           family: "elec-ec2-task"
           cluster-name: "elec-ec2-cluster"
           service-name: "elec-ecs-service"
           container-image-name-updates: 'container=nginx,image-and-tag=${AWS_ACCOUNT_URL}/electronote-web:${CIRCLE_SHA1}'
       - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build-and-push-image
           family: "elec-ec2-task"
           cluster-name: "elec-ec2-cluster"
           service-name: "elec-ecs-service"
