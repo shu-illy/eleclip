@@ -9,8 +9,13 @@ RSpec.describe "SiteLayouts", type: :request do
   # end
 
   describe "GET root_path" do
+    # before do
+    #   get root_path
+    # end
+
     it "display Top Page" do
-      expect().to
+      visit root_path
+      expect(page).to render_template("static_pages/top")
     end
   end
 

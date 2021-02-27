@@ -8,18 +8,21 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 WORKDIR /electronote
 COPY Gemfile Gemfile.lock package.json yarn.lock /electronote/
 
-RUN bundle config set path './vendor/bundle' && \
-    bundle install
-
-# RUN bundle install --path ./vendor/bundle
-
 COPY . /electronote
+
+# RUN bundle config set path './vendor/bundle' && \
+#     bundle install
+
+RUN bundle install
+
+# COPY . /electronote
 
 # *.sockを配置するディレクトリを作成
 RUN rm -rf /electronote/tmp/*
 RUN mkdir -p /electronote/tmp/sockets
 RUN mkdir -p /electronote/tmp/pids
 
+# COPY start.sh /start.sh
 RUN chmod 744 /electronote/start.sh
 CMD ["sh", "/electronote/start.sh"]
 
