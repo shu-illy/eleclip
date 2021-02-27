@@ -5,26 +5,7 @@ orbs:
   aws-ecs: circleci/aws-ecs@1.1.0
   aws-cli: circleci/aws-cli@0.1.16
 
-# executors:
-#   container:
-#     working_directory: ~/electronote
-#     docker:
-#       - image: circleci/ruby:2.7
-#         environment:
-#           TZ: Asia/Tokyo
-
-
 jobs:
-  # build:
-  #   docker:
-  #     - image: circleci/ruby:2.7
-  #       environment:
-  #         BUNDLER_VERSION: 2.1.4
-  #   working_directory: ~/electronote
-  #   steps:
-  #     - checkout:
-  #           path: ~/electronote
-  #     - ruby/install-deps
   test:
     docker:
       - image: circleci/ruby:2.7
@@ -41,9 +22,6 @@ jobs:
       RAILS_ENV: test
       RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
       APP_DATABASE_HOST: "127.0.0.1"
-      # APP_DATABASE: electronote_test
-      # APP_DATABASE_USERNAME: root
-      # APP_DATABASE_PASSWORD: rootpass
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
     working_directory: ~/electronote
@@ -60,29 +38,6 @@ jobs:
       # TODO: RubocopとRSpec構築したらコメントアウト外して、上のテストを削除
       # - ruby/rubocop-check
       # - ruby/rspec-test
-  # build-and-push-images:
-  #   docker:
-  #     - image: circleci/ruby:2.7
-  #       environment:
-  #         BUNDLER_VERSION: 2.1.4
-  #   working_directory: ~/electronote
-  #   steps:
-  #     - checkout:
-  #         path: ~/electronote
-  #     - aws-ecr/build-and-push-image:
-  #         account-url: AWS_ACCOUNT_URL
-  #         create-repo: true
-  #         dockerfile: ./docker/nginx/Dockerfile
-  #         repo: "electronote-web"
-  #         region: AWS_REGION
-  #         tag: "${CIRCLE_SHA1}"
-  #     - aws-ecr/build-and-push-image:
-  #         account-url: AWS_ACCOUNT_URL
-  #         create-repo: true
-  #         dockerfile: ./docker/rails/Dockerfile
-  #         repo: "electronote_app"
-  #         region: AWS_REGION
-  #         tag: "${CIRCLE_SHA1}"
 
   db-migrate-on-task-run:
     docker:
@@ -103,26 +58,6 @@ jobs:
               --cluster elec-ec2-cluster \
               --task-definition elec-ec2-task \
               --overrides file://docker/run_task_db_migrate_production.json
-  # deploy-and-service-update:
-  #   docker:
-  #     - image: circleci/ruby:2.7
-  #       environment:
-  #         BUNDLER_VERSION: 2.1.4
-  #   working_directory: ~/electronote
-  #   steps:
-  #     - checkout:
-  #         path: ~/electronote
-  #     - aws-ecs/deploy-service-update:
-  #         family: "elec-ec2-task"
-  #         cluster-name: "elec-ec2-cluster"
-  #         service-name: "elec-ecs-service"
-  #         container-image-name-updates: 'container=nginx,image-and-tag=${AWS_ACCOUNT_URL}/electronote-web:${CIRCLE_SHA1}'
-  #     - aws-ecs/deploy-service-update:
-  #         family: "elec-ec2-task"
-  #         cluster-name: "elec-ec2-cluster"
-  #         service-name: "elec-ecs-service"
-  #         container-image-name-updates:  'container=rails,image-and-tag=${AWS_ACCOUNT_URL}/electronote_app:${CIRCLE_SHA1}'
-
 
 workflows:
   test:
@@ -174,92 +109,3 @@ workflows:
           cluster-name: "elec-ec2-cluster"
           service-name: "elec-ecs-service"
           container-image-name-updates:  'container=rails,image-and-tag=${AWS_ACCOUNT_URL}/electronote_app:${CIRCLE_SHA1}'
-
-# workflows:
-#   test:
-#     jobs:
-#       - test
-#   build-and-push-images:
-#     jobs:
-      # - aws-ecr/build-and-push-image:
-      #     filters:
-      #       branches:
-      #         only: main
-      #     account-url: AWS_ACCOUNT_URL
-      #     create-repo: true
-      #     dockerfile: ./docker/nginx/Dockerfile
-      #     repo: "electronote-web"
-      #     region: AWS_REGION
-      #     tag: "${CIRCLE_SHA1}"
-      # - aws-ecr/build-and-push-image:
-      #     filters:
-      #       branches:
-      #         only: main
-      #     account-url: AWS_ACCOUNT_URL
-      #     create-repo: true
-      #     dockerfile: ./docker/rails/Dockerfile
-      #     repo: "electronote_app"
-      #     region: AWS_REGION
-      #     tag: "${CIRCLE_SHA1}"
-  
-  # deploy-services-update:
-  #   jobs:
-      # - aws-ecs/deploy-service-update:
-      #     # requires:
-      #     #   - aws-ecr/build-and-push-image
-      #     family: "elec-ec2-task"
-      #     cluster-name: "elec-ec2-cluster"
-      #     service-name: "elec-ecs-service"
-      #     container-image-name-updates: 'container=nginx,image-and-tag=${AWS_ACCOUNT_URL}/electronote-web:${CIRCLE_SHA1}'
-      # - aws-ecs/deploy-service-update:
-      #     # requires:
-      #     #   - aws-ecr/build-and-push-image
-      #     family: "elec-ec2-task"
-      #     cluster-name: "elec-ec2-cluster"
-      #     service-name: "elec-ecs-service"
-      #     container-image-name-updates:  'container=rails,image-and-tag=${AWS_ACCOUNT_URL}/electronote_app:${CIRCLE_SHA1}'
-
-
-# backup
-# workflows:
-#   test:
-#     jobs:
-#       - test
-#   deploy-web:
-#     jobs:
-#       - aws-ecr/build-and-push-image:
-#           filters:
-#             branches:
-#               only: main
-#           account-url: AWS_ACCOUNT_URL
-#           create-repo: true
-#           dockerfile: ./docker/nginx/Dockerfile
-#           repo: "electronote-web"
-#           region: AWS_REGION
-#           tag: "${CIRCLE_SHA1}"
-#       - aws-ecs/deploy-service-update:
-#           requires:
-#             - aws-ecr/build-and-push-image
-#           family: "elec-ec2-task"
-#           cluster-name: "elec-ec2-cluster"
-#           service-name: "elec-ecs-service"
-#           container-image-name-updates: 'container=nginx,image-and-tag=${AWS_ACCOUNT_URL}/electronote-web:${CIRCLE_SHA1}'
-#   deploy-app:
-#     jobs:
-#       - aws-ecr/build-and-push-image:
-#           filters:
-#             branches:
-#               only: main
-#           account-url: AWS_ACCOUNT_URL
-#           create-repo: true
-#           dockerfile: ./docker/rails/Dockerfile
-#           repo: "electronote_app"
-#           region: AWS_REGION
-#           tag: "${CIRCLE_SHA1}"
-#       - aws-ecs/deploy-service-update:
-#           requires:
-#             - aws-ecr/build-and-push-image
-#           family: "elec-ec2-task"
-#           cluster-name: "elec-ec2-cluster"
-#           service-name: "elec-ecs-service"
-#           container-image-name-updates:  'container=rails,image-and-tag=${AWS_ACCOUNT_URL}/electronote_app:${CIRCLE_SHA1}'
