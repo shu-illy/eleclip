@@ -19,8 +19,8 @@ services:
     command: bundle exec unicorn -p 3000 -c /electronote/config/unicorn.rb
     # command: bundle exec rails s -p 3000 -b '0.0.0.0'
     volumes:
-      - socket_data:/electronote/tmp/sockets
-      - ./log:/electronote/log
+      - tmp_data:/electronote/tmp
+      - .:/electronote
       - /var/tmp
       - bundle_path:/usr/local/bundle
     # environment:
@@ -44,4 +44,4 @@ services:
 volumes:
   nginx_log-data:
   bundle_path:
-  socket_data:
+  tmp_data:

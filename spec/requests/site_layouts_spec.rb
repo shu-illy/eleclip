@@ -9,13 +9,20 @@ RSpec.describe "SiteLayouts", type: :request do
   # end
 
   describe "GET root_path" do
-    # before do
-    #   get root_path
-    # end
+    before do
+      get root_path
+    end
 
     it "display Top Page" do
-      visit root_path
-      expect(page).to render_template("static_pages/top")
+      expect(response).to render_template("static_pages/top")
+    end
+
+    it "have 2 links to root_path" do
+      expect(page).to have_link nil, href: root_path, count: 2
+    end
+
+    it "have a link to root_path (Top Page)" do
+      expect(page).to have_link 'トップページ', href: root_path, count: 1
     end
   end
 

@@ -16,6 +16,7 @@ require 'capybara/rspec'
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.include Capybara::DSL
   config.include FactoryBot::Syntax::Methods
   config.before(:each, type: :system) do
     driven_by :selenium_chrome_headless
