@@ -32,12 +32,12 @@ jobs:
       - run:
           name: DB setup
           command: bundle exec rails db:schema:load --trace
-      # - run:
-      #     name: test
-      #     command: bundle exec rails test
+      - run:
+          name: RSpec test
+          command: bin/rspec
       # TODO: RubocopとRSpec構築したらコメントアウト外して、上のテストを削除
       # - ruby/rubocop-check
-      - ruby/rspec-test
+      # - ruby/rspec-test
 
   db-migrate-on-task-run:
     docker:
