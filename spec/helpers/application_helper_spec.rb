@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationHelper, type: :helper do
-  # pending "add some examples to (or delete) #{__FILE__}"
-
   describe "full title helper" do
     it "return root title" do
       expect(full_title).to eq("ElectroNote")

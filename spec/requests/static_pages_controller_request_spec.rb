@@ -8,11 +8,13 @@ RSpec.describe "StaticPagesControllers", type: :request do
     before do
       get root_path
     end
-
+    
+    # GET root_pathのレスポンスがsuccessであること
     it "returns success" do
       expect(response).to have_http_status(:success)
     end
 
+    # root_pathのタイトルが正しいこと
     it "have appropriate title" do
       expect(response.body).to include "<title>#{base_title}</title>"
     end
@@ -23,10 +25,12 @@ RSpec.describe "StaticPagesControllers", type: :request do
       get contact_path
     end
 
+    # GET contact_pathのレスポンスがsuccessであること
     it "returns success" do
       expect(response).to have_http_status(:success)
     end
 
+    # contact_pathのタイトルが正しいこと
     it "have appropriate title" do
       expect(response.body).to include "<title>Contact | #{base_title}</title>"
     end
@@ -37,10 +41,12 @@ RSpec.describe "StaticPagesControllers", type: :request do
       get help_path
     end
 
+    # GET help_pathのレスポンスがsuccessであること
     it "returns success" do
       expect(response).to have_http_status(:success)
     end
 
+    # help_pathのタイトルが正しいこと
     it "have appropriate title" do
       expect(response.body).to include "<title>Help | #{base_title}</title>"
     end
