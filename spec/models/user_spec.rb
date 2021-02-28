@@ -1,74 +1,89 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
 
-  # def setup
-  #   @user = User.new(name: "Example User", email: "user@example.com",
-  #                     password: "foobar", password_confirmation: "foobar")
-  # end
+  describe User do
+    before do
+      @user = User.new(name: "Example User", email: "user@example.com",
+                          password: "foobar", password_confirmation: "foobar")
+    end
+    
+    # 有効であること
+    it "is valid" do
+      expect(@user).to be_valid
+    end
 
-  # test "should be valid" do
-  #   assert @user.valid?
-  # end
+    # 名前が空白であれば無効になること
+    it "is invalid with empty first name" do
+      @user.name = " "
+      expect(@user).to be_invalid
+    end
+    
+    # メールアドレスが空白であれば無効になること
+    it "is invalid with empty email address" do
+      @user.email = " "
+      expect(@user).to be_invalid
+    end
 
-  # test "name should be present" do
-  #   @user.name = " "
-  #   assert_not @user.valid?
-  # end
+    # 長過ぎる名前(51文字以上)は無効になること
+    it "is invalid with too long name" do
+      @user.name = "a" * 51
+      expect(@user).to be_invalid
+    end
 
-  # test "email should be present" do
-  #   @user.email = " "
-  #   assert_not @user.valid?
-  # end
+    # 長すぎるメールアドレス(244文字以上)は無効であること(ドメイン除く)
+    it "is invalid with too long email" do
+      @user.email = "a" * 244 + "@example.com"
+      expect(@user).to be_invalid
+    end
 
-  # test "name should not be too long" do
-  #   @user.name = "a" * 51
-  #   assert_not @user.valid?
-  # end
-  
-  # test "email should not be too long" do
-  #   @user.email = "a" * 244 + "@example.com"
-  #   assert_not @user.valid?
-  # end
+    # メールアドレスに重複がないこと
+    it "is invalid with duplicate email" do
+      duplicate_user = @user.dup
+      @user.save
+      expect(duplicate_user).to be_invalid
+    end
 
-  # test "email validation should accept valid addresses" do
-  #   valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org first.last@foo.jp alice+bob@baz.cn]
-  #   valid_addresses.each do |valid_address|
-  #     @user.email = valid_address
-  #     assert @user.valid?, "#{valid_address.inspect} should be valid"
-  #   end
-  # end
+    # 有効なフォーマットのメールアドレスが通ること
+    it "is accepted with valid addresses" do
+      valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org first.last@foo.jp alice+bob@baz.cn]
+      valid_addresses.each do |valid_address|
+        @user.email = valid_address
+        expect(@user).to be_valid, "#{valid_address.inspect} is rejected"
+      end
+    end
 
-  # test "email validation should reject invalid addresses" do
-  #   invalid_addresses = %w[user@example,com user_at_foo.org user.nae@example. foo@bar_baz.com fo@bar+baz.com foo@bar..com]
-  #   invalid_addresses.each do |invalid_address|
-  #     @user.email = invalid_address
-  #     assert_not @user.valid?, "#{invalid_address.inspect} should be invalid"
-  #   end
-  # end
+    # 無効なフォーマットのメールアドレスが通らないこと
+    it "is rejected with invalid addresses" do
+      invalid_addresses = %w[user@example,com user_at_foo.org user.nae@example. foo@bar_baz.com fo@bar+baz.com foo@bar..com]
+      invalid_addresses.each do |invalid_address|
+        @user.email = invalid_address
+        expect(@user).to be_invalid, "#{invalid_address.inspect} is accepted"
+      end
+    end
 
-  # test "email addresses should be unique" do
-  #   duplicate_user = @user.dup
-  #   @user.save
-  #   assert_not duplicate_user.valid?
-  # end
+    # メールアドレスがlower caseで保存されていること
+    it "is saved with lower-case addresses" do
+        mixed_case_email = "Foo@ExAMPle.CoM"
+        @user.email = mixed_case_email
+        @user.save
+        expect(mixed_case_email.downcase).to eq(@user.reload.email)
+    end
 
-  # test "email address should be saved as lower-case" do
-  #   mixed_case_email = "Foo@ExAMPle.CoM"
-  #   @user.email = mixed_case_email
-  #   @user.save
-  #   assert_equal mixed_case_email.downcase, @user.reload.email
-  # end
+    # パスワードが空でないこと
+    it "has nonblank password" do
+      @user.password = @user.password_confirmation = " " * 6
+      expect(@user).to be_invalid
+    end
 
-  # test "password should be present (nonblank)" do
-  #   @user.password = @user.password_confirmation = " " * 6
-  #   assert_not @user.valid?
-  # end
+    # 最低長さ(6文字)より短いパスワードが無効になること
+    it "is invalid when password is shorter than 6 letters" do
+      @user.password = @user.password_confirmation = "a" * 5
+      expect(@user).to be_invalid
+    end
 
-  # test "password should have a minimum length" do
-  #   @user.password = @user.password_confirmation = "a" * 5
-  #   assert_not @user.valid?
-  # end
+
+
+  end
 
 end
