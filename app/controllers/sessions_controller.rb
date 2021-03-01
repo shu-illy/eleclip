@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       # ログイン後にユーザー情報のページにリダイレクト
     else
       # エラーメッセージを返してnewをレンダリング
+      flash.now[:danger] = "メールアドレスまたはパスワードが正しくありません"
       render 'new'
     end
   end

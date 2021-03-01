@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Sessions", type: :request do
+RSpec.describe "UnitTest of sessions controller", type: :request do
 
   describe "GET login_path" do
     it "returns success" do

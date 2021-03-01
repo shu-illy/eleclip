@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "StaticPagesControllers", type: :request do
+RSpec.describe "UnitTest of static_pages controller", type: :request do
 
   let(:base_title) { 'ElectroNote'}
   
