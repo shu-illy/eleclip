@@ -18,7 +18,7 @@ RSpec.describe "IntegrationTest of user login", type: :request do
         # flashメッセージが表示されること
         expect(flash[:danger]).to be_truthy, "flash message is empty"
 
-        # 別のページ（Topページなど） にいったん移動する
+        # 別のページ(Topページなど)にいったん移動する
         get root_path
 
         # 移動先のページでフラッシュメッセージが表示されていないこと
