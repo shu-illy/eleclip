@@ -49,3 +49,5 @@ output.md
 sys_config.dio.svg
 
 vendor/bundle/*
+
+*.todo
