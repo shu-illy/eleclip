@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Users", type: :request do
+RSpec.describe "UnitTest of users controller", type: :request do
 
   describe "GET signup_path" do
     it "return success" do

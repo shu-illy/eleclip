@@ -1,13 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "UsersSignups", type: :request do
-  # describe "GET /users_signups" do
-  #   it "works! (now write some real specs)" do
-  #     get users_signups_path
-  #     expect(response).to have_http_status(200)
-  #   end
-  # end
-
+RSpec.describe "IntegrationTest of users signup", type: :request do
   
   describe "Invalid signup information" do
     # 不正な登録情報でユーザー数が変わらなず(登録できない)こと
@@ -33,7 +26,8 @@ RSpec.describe "UsersSignups", type: :request do
       end.to change(User, :count).by(1), "User count change is not correct"
       follow_redirect!
       expect(response).to render_template("users/show"), "user/show is not rendered"
-      expect(response.body).to include("alert-success"), "redirecte response does not have flash message"
+      expect(is_logged_in?).to be_truthy, "is not logged in"
+      expect(response.body).to include("alert-success"), "redirect response does not have flash message"
     end
   end
 

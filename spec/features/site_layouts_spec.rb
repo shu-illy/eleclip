@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "SiteLayoutTest", type: :feature do
+RSpec.describe "IntegrationTest of SiteLayout", type: :feature do
 
   scenario "layout links" do
     visit root_path
