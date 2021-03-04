@@ -82,6 +82,10 @@ RSpec.describe User, type: :model do
       expect(@user).to be_invalid
     end
 
+    # ブラウザにcookiesがあるが、アプリ側で記憶ダイジェストがない場合にユーザー認証が無効になる
+    it "is invalid without remember_digest" do 
+      expect(@user.authenticated?('')).to be_falsey
+    end
 
 
   end

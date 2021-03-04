@@ -42,14 +42,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 1.7em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
@@ -172,10 +172,35 @@ input {
   }
 }
 
+
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+/* top page */
+
 .jumbotron {
   width: 100%;
   background-image: image-url('pwb.jpg');
   background-color: rgba(255,255,255,0.5);
   background-blend-mode: lighten;
+  h1 {
+    font-size: 3.5em;
+  }
+  h2 {
+    color: black;
+    font-size: 1.7em;
+  }
   
 }
