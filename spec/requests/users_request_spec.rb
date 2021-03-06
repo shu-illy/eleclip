@@ -60,6 +60,15 @@ RSpec.describe "UnitTest of users controller", type: :request do
         expect(flash).to be_empty
         expect(response).to redirect_to root_url
       end
+
+      it "is not allowed the admin attribute to be edited via the web" do
+        log_in_as(@other_user)
+        expect(@other_user.admin?).to be_falsey
+        patch user_path(@other_user), params: { user: { password: @other_user.password,
+                                                        password_confirmation: @other_user.password,
+                                                        admin: true }  }
+        expect(@other_user.reload.admin?).to be_falsey
+      end
     end
   end
 
