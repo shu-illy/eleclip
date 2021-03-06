@@ -72,6 +72,34 @@ RSpec.describe "UnitTest of users controller", type: :request do
     end
   end
 
+  describe "Destroy" do
+    
+    before do
+      @admin_user = FactoryBot.create(:admin_user)
+    end
+
+    #  ログインしてない場合は削除できず、ログインページにリダイレクトされること
+    context "without login" do
+      it "is redirected" do
+        expect {
+          delete user_path(@user)
+        }.to change(User, :count).by(0)
+        expect(response).to redirect_to login_path
+      end
+    end
+
+    # ログインしているがadminでない場合は削除できず、ユーザー一覧にリダイレクトされること
+    context "with login by general user" do
+      it "is redirected" do
+        log_in_as(@user)
+        expect {
+          delete user_path(@admin_user)
+        }.to change(User, :count).by(0)
+        expect(response).to redirect_to users_path
+      end
+    end
+  end
+
 
 
 end
