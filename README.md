@@ -26,12 +26,14 @@ https://electronote.net/
 - 作品と部品の関連付け
 - 自分の作品をシェア
 
-といったことができる、いわば「電子工作版クックパッド」のようなプラットフォームがあれば役立ちそうだと感じ、開発することを思い立ちました。
+といったことができるプラットフォームがあれば、初心者から上級者まで、電子工作に関する情報収集や
+交流ができるようになり、色んな人が工作を楽しみやすくなると思い、開発することを思い立ちました。
 
 ## 使用技術
 
 ### フロントエンド
 - HTML/CSS
+- jQuery
 - Bootstrap
 ### バックエンド
 - Ruby on Rails6.0
@@ -41,10 +43,9 @@ https://electronote.net/
 - MySQL
 ### Webサーバ
 - Nginx
-### コンテナ
-- Docker
-- docker-compose
 ### インフラ
+- Docker
+- Docker compose
 - AWS
   - VPC
   - EC2
@@ -54,7 +55,7 @@ https://electronote.net/
   - RDS
   - Route53
   - ACM
-  - CloudWatch)
+  - CloudWatch
 - CircleCI
 <!-- ### 開発環境
 - Macbook pro
