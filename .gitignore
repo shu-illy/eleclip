@@ -46,8 +46,10 @@ yarn-debug.log*
 
 output.md
 .env
-sys_config.dio.svg
+*.dio.svg
 
 vendor/bundle/*
 
 *.todo
+
+*master.key
