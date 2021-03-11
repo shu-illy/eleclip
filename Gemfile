@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'rails'#,      '6.0.3'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'active_storage_validations'
 gem 'mysql2'
 gem 'bcrypt'#,         '3.1.13'
 gem 'bootstrap-sass'#, '3.4.1'
@@ -44,6 +47,7 @@ group :test do
 end
 
 group :production do
+  gem 'aws-sdk-s3', require: false
 end
 
 group :production, :staging do
