@@ -33,9 +33,9 @@ RSpec.describe "IntegrationTest of UsersIndex", type: :request do
           end
         end
         expect {
-            delete user_path(@non_admin)
-          }.to change(User, :count).by(-1)
-        end
+          delete user_path(@non_admin)
+        }.to change(User, :count).by(-1)
+      end
     end
 
     context "as non-admin" do
