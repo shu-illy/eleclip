@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "activerecord", ">= 6.0.3.5"
-gem 'bcrypt',         '3.1.13'
-gem 'bootsnap',   '1.4.5', require: false
+gem 'activerecord', '>= 6.0.3.5'
+gem 'bcrypt', '3.1.13'
+gem 'bootsnap', '1.4.5', require: false
 gem 'bootstrap-sass', '3.4.1'
 gem 'bootstrap-will_paginate'
 gem 'carrierwave'
@@ -11,10 +13,10 @@ gem 'faker'
 gem 'fog-aws'
 gem 'friendly_id'
 gem 'image_processing'
-gem 'jbuilder',   '2.9.1'
+gem 'jbuilder', '2.9.1'
 gem 'mini_magick'
 gem 'mysql2'
-gem 'rails'#,      '6.0.3'
+gem 'rails' # ,      '6.0.3'
 gem 'sass-rails', '5.1.0'
 gem 'turbolinks', '5.2.0'
 gem 'unicorn'
@@ -23,7 +25,7 @@ gem 'will_paginate'
 # gem 'rails-i18n'
 
 group :development, :test do
-  gem 'byebug',  '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
@@ -57,4 +59,3 @@ end
 
 # group :production, :staging do
 # end
-

@@ -95,3 +95,82 @@ Style/RedundantArgument: # (new in 1.4)
 
 Style/SwapValues: # (new in 1.1)
   Enabled: true
+
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+
+Lint/SuppressedException:
+  Exclude:
+    - 'config/unicorn.rb'
+
+Lint/UnusedBlockArgument:
+  Exclude:
+    - 'config/routes.rb'
+    - 'config/unicorn.rb'
+
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/MethodLength:
+  Max: 13
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Metrics/BlockLength:
+  Max: 30
+  Exclude:
+    - 'spec/**/*'
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/GlobalStdStream:
+  Exclude:
+    - 'config/environments/production.rb'
+
+# 中身が空のメソッドの警告をしない
+Style/EmptyMethod:
+  Exclude:
+    - 'app/controllers/sessions_controller.rb'
+    - 'app/controllers/static_pages_controller.rb'
+
+# unicorn.rbだけグローバル変数の使用を許可する
+Style/GlobalVars:
+  Exclude:
+    - 'config/unicorn.rb'
+
+# 後置の if/unless を使わない方が見やすいので無効に
+Style/IfUnlessModifier:
+  Enabled: false
+
+# 数値をアンダースコアで区切らない
+Style/NumericLiterals:
+  Enabled: false
+
+# selfを明示した方が読みやすい
+Style/RedundantSelf:
+  Enabled: false
+
+# 読みにくくなるので除外
+Style/SymbolArray:
+  Enabled: false
+
+# 読みにくくなるので除外
+Style/WordArray:
+  Enabled: false
+
+# migration以外は最大20行に
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - "db/migrate/*.rb"
