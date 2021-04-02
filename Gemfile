@@ -23,11 +23,13 @@ gem 'unicorn'
 gem 'webpacker',  '4.0.7'
 gem 'will_paginate'
 # gem 'rails-i18n'
+gem 'annotate'
 
 group :development, :test do
   gem 'byebug', '11.0.1', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
